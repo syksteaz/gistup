@@ -4,9 +4,7 @@ class GistsController < ApplicationController
   end
 
   def index
-    # @gists_result = RestClient.get('https://api.github.com/users/syksteaz/gists', { client_id: Rails.application.secrets.CLIENT_ID, client_secret: Rails.application.secrets.CLIENT_ID, access_token: params[:access_token] })
-    # @parsed_gists_result = JSON.parse(@gists_result)
-    client = Octokit::Client.new(:client_id => Rails.application.secrets.CLIENT_ID,:client_secret => Rails.application.secrets.CLIENT_SECRET, :access_token =>'09b59b1ad64a10c8ad25db61d086a520653f3140')
+    client = Octokit::Client.new(:client_id => Rails.application.secrets.CLIENT_ID,:client_secret => Rails.application.secrets.CLIENT_SECRET, :access_token => params[:access_token])
     @gists_result = client.gists
     gists_ids = []
     length = @gists_result.size-1
@@ -16,24 +14,11 @@ class GistsController < ApplicationController
   end
 
   def show
-    # ici faire un requête sur le modèle de 'Get a single gist'
     @gists_result = RestClient.get('https://api.github.com/gists/'+params[:id], { client_id: Rails.application.secrets.CLIENT_ID, client_secret: Rails.application.secrets.CLIENT_ID, access_token: params[:access_token] })
     @parsed_gists_result = JSON.parse(@gists_result)
   end
 
   def new
-    # @client = Octokit::Client.new \
-    # :login    => 'syksteaz',
-    # :password => 'archibald1!'
-
-    # @client.create_gist \
-    #   "description": "Notorious BIG",
-    #   "public": true,
-    #   "files": {
-    #   "aloa.md": {
-    #   "content": "BIG BIGGY BIG"
-    #     }
-    #   }
     @gist = Gist.new
   end
 
@@ -66,7 +51,7 @@ class GistsController < ApplicationController
     @gistid = Gist.where('categories LIKE "%choco%"').pluck(:github_gist_id)
     @gistid.each do |gistid|
       intermediary_hash_of_gists = {}
-      client = Octokit::Client.new(:client_id => Rails.application.secrets.CLIENT_ID,:client_secret => Rails.application.secrets.CLIENT_SECRET, :access_token =>'09b59b1ad64a10c8ad25db61d086a520653f3140')
+      client = Octokit::Client.new(:client_id => Rails.application.secrets.CLIENT_ID,:client_secret => Rails.application.secrets.CLIENT_SECRET, :access_token => params[:access_token])
       gist_fetched = client.gist(gistid)
       intermediary_hash_of_gists[:filename] = gist_fetched[:"files"].first[0]
       intermediary_hash_of_gists[:description] = gist_fetched[:"files"].first[0]
