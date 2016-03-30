@@ -1,2 +1,11 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-3">
+      <h2 class="text-center">GISTS ARE FANTASTICS!</h2>
+      <div class="btn-medium">
+        <i class="fa fa-github"></i>
+        <%= link_to 'Start by connecting your github account', 'https://github.com/login/oauth/authorize?client_id='+@client_id+'&scope=gist&redirect_uri=http://localhost:3000/pages/callback' %>
+      </div>
+    </div>
+  </div>
+</div>

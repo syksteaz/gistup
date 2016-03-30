@@ -1,0 +1,159 @@
+L'exercice consiste à développer une application rails sur laquelle on peut
+- enregistrer,
+- catégoriser et
+- rechercher des gists (https://gist.github.com.)
+
+Les contraintes sont :
+
+- Utiliser le framework Ruby on Rails
+- Une base de données MySQL
+
+steps
+1) create app with routes, models, controllers
+1 bis) add sql database
+2) implement connection to github api
+3) implement gists fetch into database
+4) implement creating a new gists (includes category)
+5) implement adding a category to an existing gists
+6) implement searching gists
+
+User Flow :
+- l'utilisateur arrive sur la landing
+- il clique sur un bouton "fetch my gists from github"
+- il est redirigé sur une page avec la liste de tous ses gists,
+    avec un champs de recherche en haut de la page,
+    avec un bouton 'ajouter un gist'
+- il peut cliquer sur chaque gist pour aller sur sa view show et ajouter une catégorie : la catégorie sera un array qu'on
+remplira au fur et à mesure.
+
+
+rails new \
+  -T --database mysql \
+  -m https://raw.githubusercontent.com/syksteaz/rails-templates/master/minimal.rb \
+  gitsup
+
+
+GITHUB API : What I want to do :
+1) Connect the user via Oauth to github
+2) Fetch his gists
+3) Display his gists on gists/index :
+  - ID of the Gist
+  - Title
+  - Content
+
+
+Omniauth gem
+secrets.yml avec CLIENT ID and CLIENT SECRET
+
+
+OMNIAUTH TO DO :
+- sur la page d'accueil, un lien (bouton) vers l'authentification pages/index
+- il faut une route pour le callback
+- une fois connecté, rediriger le user vers gists/index
+Welcome, here the list of your gists fetched f
+OMNIAUTH DONE :
+- client_id and client_secret in secrets.yml => allows to access this variable in the omniauth process
+pour y accéder : Rails.application.secrets.key_name
+
+********************************************************************************
+********************************************************************************
+
+28/03/2016
+
+- pb 1 : octokit renvoie un objet client, pas un access_token
+
+- pb 2 : comment lire l'objet client ?
+
+- pb 3 : l'objet client ne semble pas lié à un user en particulier
+
+
+1) le user donne sont login et mot de passe via un formulaire
+2) on les envoie sur github pour créer un access token
+3) on récupère l'access_token et on l'utilise pour faire les reqûetes ultérieures
+
+Ce que je veux faire :
+- Créer un form sur la page d'accueil
+- demander login et mot de passe
+- les envoyer vers la page suivante qui se charge de créer le client octokit en utilisant
+login et mot de passe envoyés en params
+
+
+curl https://api.github.com/?access_token=0299d016cec26204b6fbe2b1a0bc601f184323d6
+access_token : 9da04247ffa4e10b40eaac535a7824e32e7d8c66
+
+
+
+
+
+<h1> <i class="fa fa-list-ol"></i> Welcome, here the list of your gists fetched from github: </h1>
+
+
+  <% length = @parsed_gists_result.size-1 %> <br> <br>
+  <% (0..length).each do |number| %>
+    <strong>ID:</strong> <%= @parsed_gists_result[number]["id"] %> <br> <br>
+    <strong>FILE NAME:</strong>   <%= @parsed_gists_result[number]["files"].keys[0] %> <br><br>
+    <strong>DESCRIPTION:</strong>  <%= @parsed_gists_result[number]["description"]%> <br><br>
+    <strong>VIEW IT ON GITHUB:</strong>  url html vers gist à construire avec ID <br><br>  <br> <br> <br>
+  <% end %>
+
+
+*************************
+
+  <%= @parsed_gists_result[0]["files"] %> <br> <br>
+  <%= @parsed_gists_result[0]%> <br> <br>
+
+
+    @result = RestClient.post('https://github.com/login/oauth/access_token', {client_id: '2167ec1d1fe687a67d44', client_secret: '38d49d54a65fd8db7b81b2df9ae737ece4df74df', code: 'b08e8cd8309be7288bd1'}, accept: :json)
+
+
+
+
+
+
+<h1> <i class="fa fa-list-ol"></i> Welcome, here the list of your gists fetched from github: </h1>
+
+
+  <% length = @parsed_gists_result.size-1 %> <br> <br>
+  <% (0..length).each do |number| %>
+    <strong>ID:</strong> <%= @parsed_gists_result[number]["id"] %> <br> <br>
+    <strong>FILE NAME:</strong>   <%= @parsed_gists_result[number]["files"].keys[0] %> <br><br>
+    <strong>DESCRIPTION:</strong>  <%= @parsed_gists_result[number]["description"]%> <br><br>
+    <strong>VIEW IT ON GITHUB:</strong>  url html vers gist à construire avec ID <br><br>  <br> <br> <br>
+  <% end %>
+
+
+*************************
+
+  <%= @parsed_gists_result[0]["files"] %> <br> <br>
+  <%= @parsed_gists_result[0]%> <br> <br>
+
+
+*************************
+
+1. Je suis sur la home : je clique sur fetch data from github, ma requete récupère un code
+
+
+
+
+No route matches {:action=>"show", :controller=>"gists", :gistid=>"855be380890fa6cdff14"} missing required keys: [:id]
+
+
+<%= simple_form_for @gist do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description, as: :text %>
+  <%= f.input :content, as: :text %>
+  <%= f.input :public, as: :select %>
+  <%= f.button :submit %>
+<% end %>
+
+
+  <%= @gists_result.size %><br><br><br>
+  <%= @gists_result[0][:url] %><br><br><br>
+  filename: <%= @gists_result[0][:files][:"TEST.md"][:filename] %><br><br><br>
+  description: <%= @gists_result[0][:description] %><br><br><br>
+  id: <%= @gists_result[0][:id] %><br><br><br>
+  <%= @gists_result[0][:files].key %><br><br><br>
+
+  <%= @gists_result %><br><br><br>
+
+rails g migration AddCategoriesToGists

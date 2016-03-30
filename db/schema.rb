@@ -11,6 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20160330122910) do
+
+  create_table "gists", force: :cascade do |t|
+    t.text     "name",            limit: 65535
+    t.text     "description",     limit: 65535
+    t.text     "content",         limit: 65535
+    t.boolean  "public"
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+    t.text     "github_username", limit: 65535
+    t.string   "categories",      limit: 255,   default: "--- []\n"
+    t.string   "github_gist_id",  limit: 255
+  end
 
 end

@@ -1,5 +1,18 @@
 Rails.application.routes.draw do
   root to: 'pages#home'
+  resources :pages, only: [:home] do
+    collection do
+      get 'callback', to: 'pages#callback'
+    end
+  end
+  resources :gists, only: [:show, :index, :new, :create] do
+    collection do
+      get 'category_create', to: 'gists#category_create'
+      get 'search_for_category', to: 'gists#search_for_category'
+    end
+  end
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
