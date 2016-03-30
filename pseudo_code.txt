@@ -157,3 +157,6 @@ No route matches {:action=>"show", :controller=>"gists", :gistid=>"855be380890fa
   <%= @gists_result %><br><br><br>
 
 rails g migration AddCategoriesToGists
+
+
+https://github.com/syksteaz/gistup
