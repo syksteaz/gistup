@@ -23,13 +23,14 @@ class GistsController < ApplicationController
   end
 
   def create
+    access_token = params[:access_token]
     @gist = Gist.new(gist_params)
     @gist.save
     gist = Gist.last
-    client = Octokit::Client.new(:client_id => Rails.application.secrets.CLIENT_ID,:client_secret => Rails.application.secrets.CLIENT_SECRET, :access_token =>'09b59b1ad64a10c8ad25db61d086a520653f3140')
+    client = Octokit::Client.new(:client_id => Rails.application.secrets.CLIENT_ID,:client_secret => Rails.application.secrets.CLIENT_SECRET, :access_token => access_token)
     client.create_gist(:description => gist.description, :public => gist.public, :files => {gist.name => {:content => gist.content}})
     gist.destroy
-    redirect_to gists_path
+    redirect_to gists_path(access_token: access_token)
   end
 
   def category_create
@@ -42,7 +43,7 @@ class GistsController < ApplicationController
         existing_gist.save
       end
     end
-    redirect_to gists_path
+    redirect_to gists_path(access_token: params[:access_token])
   end
 
   def search_for_category
