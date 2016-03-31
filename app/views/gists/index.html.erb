@@ -25,6 +25,7 @@
       <div class="row">
         <div class="col-xs-8 col-xs-offset-2 form-inline text-center btn-medium">
           <%= form_tag category_create_gists_path, method: :get do %>
+            <%= hidden_field_tag :access_token, params[:access_token] %>
             <%= text_field_tag :category, 'Your category here..', class: "form-control" %>
             <%= submit_tag "Apply the category to selected gists", class: "btn-medium-custom" %>
         </div>

@@ -5,6 +5,7 @@
 
       <%= simple_form_for @gist do |f| %>
         <%= f.input :name, label: 'Filename including extension...'%>
+        <%= hidden_field_tag :access_token, params[:access_token] %>
         <%= f.input :description, label: 'Gist description...' %>
         <%= f.input :content %>
         <%= f.input :public, as: :select, label: 'Should it be a public gist ?...' %>
