@@ -49,7 +49,9 @@ class GistsController < ApplicationController
   def search_for_category
     @result = params[:category]
     @hash_of_gists_for_display = {}
-    @gistid = Gist.where('categories LIKE "%choco%"').pluck(:github_gist_id)
+    variable = params[:category]
+    variable = '%' + "#{variable}" + '%'
+    @gistid = Gist.where('categories LIKE ?', variable).pluck(:github_gist_id)
     @gistid.each do |gistid|
       intermediary_hash_of_gists = {}
       client = Octokit::Client.new(:client_id => Rails.application.secrets.CLIENT_ID,:client_secret => Rails.application.secrets.CLIENT_SECRET, :access_token => params[:access_token])
