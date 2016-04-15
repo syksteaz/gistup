@@ -1,10 +1,17 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-6 col-xs-offset-3">
-      <h2 class="text-center">GISTS ARE FANTASTICS!</h2>
-      <div class="btn-medium">
+    <div class="col-xs-6 col-xs-offset-3 text-center">
+      <%= image_tag 'gistsup_logo.svg', id: "logo_home", class: "margined-light" %>
+      <h2 class="text-center red"><strong>Gistsup</strong></h2>
+      <h4 class="line-heighted">Bring clarity to your code by organizing your gists : <br>
+        <strong>Create</strong> gists <br>
+        Add <strong>category</strong> to gists <br>
+        <strong>Search</strong> gists
+      </h4>
+
+      <div class="btn-medium margined-medium">
         <i class="fa fa-github"></i>
-        <%= link_to 'Start by connecting your github account', 'https://github.com/login/oauth/authorize?client_id='+@client_id+'&scope=gist&redirect_uri=http://localhost:3000/pages/callback' %>
+        <%= link_to 'Start by connecting your github account', 'https://github.com/login/oauth/authorize?client_id='+@client_id+'&scope=gist&redirect_uri=http://localhost:3000/pages/callback', class: "link-to white" %>
       </div>
     </div>
   </div>

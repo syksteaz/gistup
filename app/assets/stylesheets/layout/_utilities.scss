@@ -23,3 +23,65 @@
 .bg-dark-blue {
   background: #3b5998;
 }
+
+// Margins
+.margined-strong {
+  margin: 5em;
+}
+
+.margined-medium {
+  margin: 2.5em;
+}
+
+.margined-light {
+  margin: 1.5em;
+}
+
+
+
+.line-heighted {
+  line-height : 1.5em;
+}
+
+
+#logo_home {
+  width: 15em;
+}
+
+
+.btn-medium {
+  background-color: $blue;
+  opacity: 1 !important;
+  &:hover {
+    color: $yellow;
+  }
+}
+
+.white {
+  color: white;
+}
+
+.red {
+  color: $red;
+}
+
+a {
+  color: $red;
+  text-decoration: none;
+  &:active {
+  color: $red;
+  text-decoration: none;
+  }
+  &:hover {
+  color: $red;
+  text-decoration: none;
+  }
+  &:focus {
+  color: $red;
+  text-decoration: none;
+  }
+  &:visited {
+  color: $red;
+  text-decoration: none;
+  }
+}
