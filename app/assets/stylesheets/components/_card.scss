@@ -1,8 +1,9 @@
 .card {
   height: 175px;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  // text-shadow: 0 1px 3px rgba(0,0,0,0.6);
   background-size: cover !important;
-  color: white;
+  color: $gray;
+  background-color: #D9DFE9;
   position: relative;
   margin: 0.5em 0 2em;
   display: flex;

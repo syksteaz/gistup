@@ -10,8 +10,8 @@
       </h4>
 
       <div class="btn-medium margined-medium">
-        <i class="fa fa-github"></i>
-        <%= link_to 'Start by connecting your github account', 'https://github.com/login/oauth/authorize?client_id='+@client_id+'&scope=gist&redirect_uri=http://localhost:3000/pages/callback', class: "link-to white" %>
+        <i class="fa fa-github fa-2x flex-item margined-sides-extra-light"></i>
+        <%= link_to 'Start by connecting your github account', github_oauth_path, class: "link-to flex-item" %>
       </div>
     </div>
   </div>

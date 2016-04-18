@@ -3,13 +3,6 @@
  * These are examples of utilities classes
  * Feel free to change them and create your own
  * ------------------------------------- */
-
-// Paddings
-.padded {
-  padding-top: 5em;
-  padding-bottom: 5em;
-}
-
 // Backgrounds
 .bg-black {
   background: #4a4a4a;
@@ -22,6 +15,16 @@
 }
 .bg-dark-blue {
   background: #3b5998;
+}
+
+// Paddings
+.padded {
+  padding-top: 5em;
+  padding-bottom: 5em;
+}
+
+.padding_bottom_light {
+  padding-bottom: 3em;
 }
 
 // Margins
@@ -37,24 +40,51 @@
   margin: 1.5em;
 }
 
+.margined-sides-extra-light {
+  margin: 0 0.5em;
+}
+
+.margin-vertical-light {
+  margin: 2em 0;
+}
+
+.margin-vertical-extra-light {
+  margin: 1em 0;
+}
 
 
+.margin-top-light {
+  margin: 1.5em;
+}
+
+
+// Miscellaneous
 .line-heighted {
   line-height : 1.5em;
 }
-
 
 #logo_home {
   width: 15em;
 }
 
+#logo_pages {
+  width: 5em;
+}
 
 .btn-medium {
   background-color: $blue;
   opacity: 1 !important;
+  font-weight: normal !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   &:hover {
     color: $yellow;
   }
+}
+
+.flex-item {
+  flex: 0 0 auto;
 }
 
 .white {
@@ -65,11 +95,19 @@
   color: $red;
 }
 
+.red-background {
+  background-color: $red !important;
+}
+
+.blue {
+  color: $blue;
+}
+
 a {
-  color: $red;
+  color: white;
   text-decoration: none;
   &:active {
-  color: $red;
+  color: white;
   text-decoration: none;
   }
   &:hover {
@@ -81,7 +119,16 @@ a {
   text-decoration: none;
   }
   &:visited {
-  color: $red;
+  color: white;
   text-decoration: none;
   }
+}
+
+.flex-container-vertical-centering {
+  display: flex;
+  align-items: center;
+}
+
+.flex-item-vertical-centering {
+  flex: 0 0 auto;
 }

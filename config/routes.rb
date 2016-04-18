@@ -8,9 +8,10 @@ Rails.application.routes.draw do
   resources :gists, only: [:show, :index, :new, :create] do
     collection do
       get 'category_create', to: 'gists#category_create'
-      get 'search_for_category', to: 'gists#search_for_category'
     end
   end
+
+  get "/github-oauth" => redirect('https://github.com/login/oauth/authorize?client_id='+"#{Rails.application.secrets.CLIENT_ID}"+'&scope=gist&redirect_uri=http://localhost:3000/pages/callback')
 
 
   # The priority is based upon order of creation: first created -> highest priority.
