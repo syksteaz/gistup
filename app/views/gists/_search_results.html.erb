@@ -1,0 +1,42 @@
+<div id="search_results_block">
+  <% unless @gists_result.nil? %>
+    <% @gists_result.each do |gist| %>
+      <% gistid = gist[:id] %>
+      <div class="col-xs-12 col-sm-4">
+        <%= check_box_tag "gist_ids[]", gistid %> Add a category to this gist
+        <div class="card">
+          <% find_gist_categories(gistid).each do |category| %>
+            <div class="card-category btn-warning"><%= category %></div>
+          <% end %>
+          <div class="card-description">
+            <h2><strong>File name:</strong>   <%= gist[:files].first[0] %></h2>
+            <p><strong>Description:</strong>  <%= gist[:description] %></p>
+            <p><strong>ID:</strong> <%= gistid %></p>
+          </div>
+          <i class="fa fa-github card-user avatar"></i>
+          <%= link_to "", gist_path(gistid, access_token: params[:access_token]), class: "card-link" %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <% unless @gistid.nil? %>
+    <% @gistid.each do |gistid| %>
+      <div class="col-xs-12 col-sm-4">
+        <%= check_box_tag "gist_ids[]", gistid %> Add a category to this gist
+        <div class="card">
+          <% find_gist_categories(gistid).each do |category| %>
+            <div class="card-category btn-warning"><%= category %></div>
+          <% end %>
+          <div class="card-description">
+            <h2><strong>File name:</strong>   <%= @hash_of_gists_for_display[:filename] %></h2>
+            <p><strong>Description:</strong>  <%= @hash_of_gists_for_display[:description]%></p>
+            <p><strong>ID:</strong> <%= gistid %></p>
+          </div>
+          <i class="fa fa-github card-user avatar"></i>
+          <%= link_to "", gist_path(gistid, access_token: params[:access_token]), class: "card-link" %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

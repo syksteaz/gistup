@@ -1,0 +1,17 @@
+<% @gistid.each do |gistid| %>
+  <div class="col-xs-12 col-sm-4">
+    <%= check_box_tag "gist_ids[]", gistid %> Add a category to this gist
+    <div class="card" style="background: linear-gradient(to left, #616161 , #9bc5c3)">
+      <% find_gist_categories(gistid).each do |category| %>
+        <div class="card-category btn-warning"><%= category %></div>
+      <% end %>
+      <div class="card-description">
+        <h2><%= @hash_of_gists_for_display[:filename] %></h2>
+        <p><strong>Description:</strong>  <%= @hash_of_gists_for_display[:description]%></p>
+<!--         <p><strong>ID:</strong> <%= gistid %></p> -->
+      </div>
+      <i class="fa fa-github card-user avatar"></i>
+      <%= link_to "", gist_path(gistid, access_token: params[:access_token]), class: "card-link" %>
+    </div>
+  </div>
+<% end %>
