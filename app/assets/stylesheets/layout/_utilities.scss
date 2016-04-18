@@ -57,6 +57,9 @@
   margin: 1.5em;
 }
 
+.margin-top-heavy {
+  margin-top: 20em;
+}
 
 // Miscellaneous
 .line-heighted {
@@ -132,3 +135,16 @@ a {
 .flex-item-vertical-centering {
   flex: 0 0 auto;
 }
+
+// #top-panel-fixed {
+//   position: fixed;
+//   left: 0px;
+//   top: 0px;
+//   z-index: 1;
+//   width: 100%;
+// }
+
+// #results-panel {
+//   position: absolute;
+//   margin-top: 20em;
+// }
