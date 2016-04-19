@@ -39,7 +39,7 @@
               <div class="margin-vertical-extra-light text-center form-inline">
   <!--               <div class="text-center btn-medium"> -->
                   <%= simple_form_for :category_create, url: category_create_gists_path, method: :get do |f| %>
-                    <%= f.input :access_token, as: :hidden, :input_html => { :value => the_access_token }, class: "form-control" %>
+                    <%= f.input :access_token, as: :hidden, :input_html => { :value => params[:access_token] || params[:search][:access_token] }, class: "form-control" %>
                     <%= f.input :category, placeholder: 'Apply a category', label: false, class: "form-control" %>
                     <%= f.button :submit, "Apply category", class: "btn-medium-custom" %>
   <!--               </div> -->
