@@ -10,9 +10,11 @@
         <% end %>
       </div>
 
-      <div class="col-xs-12 col-md-2 flex-item-vertical-centering">
-        <div class="text-center btn-medium red-background">
-          <%= link_to "New gist", new_gist_path(access_token: params[:access_token]), class: "text-center" %>
+      <div class="col-xs-12 col-md-2">
+        <div class="flex-item-vertical-centering">
+          <div class="text-center btn-medium red-background">
+            <%= link_to "New gist", new_gist_path(access_token: params[:access_token]), class: "text-center" %>
+          </div>
         </div>
       </div>
     </div>

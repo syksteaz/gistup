@@ -3,18 +3,19 @@
   // text-shadow: 0 1px 3px rgba(0,0,0,0.6);
   background-size: cover !important;
   color: $gray;
-  background-color: #D9DFE9;
+  background-color: #F7F7F7;
   position: relative;
-  margin: 0.5em 0 2em;
+  // margin: 0.5em 0 2em;
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   flex-wrap: wrap;
   align-items: flex-start;
+  align-content: flex-start;
 }
 .card-user {
   position: absolute;
-  right: 10px;
-  top: 10px;
+  right: 2px;
+  bottom: 5px;
 }
 .card-category {
   // position: absolute;
@@ -24,23 +25,24 @@
   height: 1.5em;
   margin: 0.5em;
   text-transform: uppercase;
-  flex: auto 0 0;
+  flex: 0 0 auto;
 }
 .card-description {
   position: absolute;
-  bottom: 10px;
+  top: 25px;
   left: 10px;
 }
 .card-description h2 {
-  font-size: 24px;
+  font-size: 18px;
 }
 .card-description p {
-  font-size: 13px;
+  font-size: 12px;
   }
 .card-link {
   position: absolute;
   top: 0;
   bottom: 0;
+  left: 0;
   width: 100%;
   z-index:2;
   background: black;
@@ -49,3 +51,7 @@
 // .card-link:hover{
 //   opacity: 0.1;
 // }
+
+.btn-info {
+  background-color: rgba(24, 23, 67, 0.34);
+}
