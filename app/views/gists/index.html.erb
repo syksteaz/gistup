@@ -1,81 +1,79 @@
-<div class="container">
+<div id="top-panel-fixed">
+  <div class="container">
+    <div class="row flex-container-vertical-centering">
+      <div class="col-xs-12 col-md-8 col-md-offset-2 flex-item-vertical-centering">
+        <%= link_to gists_path(access_token: params[:access_token]) do %>
+          <h3 class="text-center margin-top-light blue">
+            <i class="fa fa-list-ol margined-sides-extra-light"></i>
+            "Your gists, straight from Github"
+          </h3>
+        <% end %>
+      </div>
 
-  <div class="row flex-container-vertical-centering">
-    <div class="col-xs-12 col-md-8 col-md-offset-2 flex-item-vertical-centering">
-      <%= link_to gists_path(access_token: params[:access_token]) do %>
-        <h3 class="text-center margin-top-light blue">
-          <i class="fa fa-list-ol margined-sides-extra-light"></i>
-          "Your gists, straight from Github"
-        </h3>
+      <div class="col-xs-12 col-md-2">
+        <div class="flex-item-vertical-centering">
+          <div class="text-center btn-medium red-background">
+            <%= link_to "New gist", new_gist_path(access_token: params[:access_token]), class: "text-center" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="search_gist_category">
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+          <div class="margin-vertical-extra-light">
+  <!--           <div class="btn-medium"> -->
+              <% the_access_token = "" %>
+              <% params[:access_token].nil? ? ( the_access_token = params[:search][:access_token] ) : ( the_access_token = params[:access_token] ) %>
+              <div class="form-inline text-center">
+              <%= simple_form_for :search, url: gists_path, method: :get, remote: true do |f| %>
+                <%= f.input :access_token, as: :hidden,  :input_html => { :value => the_access_token }, class: "form-control" %>
+                <%= f.input :category, placeholder: "Search for a category", label: false, class: "form-control" %>
+                <%= f.button :submit, 'Search category', class: "btn-medium-custom" %>
+              <% end %>
+              </div>
+  <!--           </div> -->
+          </div>
+        </div>
+            <div class="col-xs-12 col-md-6">
+              <div class="margin-vertical-extra-light text-center form-inline">
+  <!--               <div class="text-center btn-medium"> -->
+                  <%= simple_form_for :category_create, url: category_create_gists_path, method: :get do |f| %>
+                    <%= f.input :access_token, as: :hidden, :input_html => { :value => the_access_token }, class: "form-control" %>
+                    <%= f.input :category, placeholder: 'Apply a category', label: false, class: "form-control" %>
+                    <%= f.button :submit, "Apply category", class: "btn-medium-custom" %>
+  <!--               </div> -->
+              </div>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="results-panel margin-top-heavy">
+  <div class="container">
+    <div id="category_block">
+      <div class="padding_bottom_light">
+        <div class="row">
+
+          </div>
+        </div>
+      </div>
+  <!--     # si @gists_result.nil? ?
+   render réponse de search_for_category
+   si @gistid .nil? || .empty?
+   render réponse de fetch_all_gists_from_github -->
+
+     <div id="search_results_block">
+      <% unless @gists_result.nil? %>
+        <%= render "gists/display_all_gists_cards_for_index" %>
+      <% end %>
+      <% unless @gistid.nil? %>
+        <%= render "gists/display_gists_cards_after_search" %>
       <% end %>
     </div>
-
-    <div class="col-xs-12 col-md-2 flex-item-vertical-centering">
-      <div class="text-center btn-medium red-background">
-        <%= link_to "New gist", new_gist_path(access_token: params[:access_token]), class: "text-center" %>
-      </div>
-    </div>
+              <% end %>
   </div>
-
-  <div id="new_gist_block" >
-    <div class="row">
-      <div class="col-xs-12 col-md-2 col-md-offset-10">
-        <div class="margin-vertical-extra-light">
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="search_gist_category">
-    <div class="row">
-      <div class="col-xs-12 col-md-6">
-        <div class="margin-vertical-extra-light">
-<!--           <div class="btn-medium"> -->
-            <% the_access_token = "" %>
-            <% params[:access_token].nil? ? ( the_access_token = params[:search][:access_token] ) : ( the_access_token = params[:access_token] ) %>
-            <div class="form-inline text-center">
-            <%= simple_form_for :search, url: gists_path, method: :get, remote: true do |f| %>
-              <%= f.input :access_token, as: :hidden,  :input_html => { :value => the_access_token }, class: "form-control" %>
-              <%= f.input :category, placeholder: "Search for a category", label: false, class: "form-control" %>
-              <%= f.button :submit, 'Search category', class: "btn-medium-custom" %>
-            <% end %>
-            </div>
-<!--           </div> -->
-        </div>
-      </div>
-          <div class="col-xs-12 col-md-6">
-            <div class="margin-vertical-extra-light text-center form-inline">
-<!--               <div class="text-center btn-medium"> -->
-                <%= simple_form_for :category_create, url: category_create_gists_path, method: :get do |f| %>
-                  <%= f.input :access_token, as: :hidden, :input_html => { :value => the_access_token }, class: "form-control" %>
-                  <%= f.input :category, placeholder: 'Apply a category', label: false, class: "form-control" %>
-                  <%= f.button :submit, "Apply category", class: "btn-medium-custom" %>
-<!--               </div> -->
-            </div>
-          </div>
-    </div>
-  </div>
-
-  <div id="category_block">
-    <div class="padding_bottom_light">
-      <div class="row">
-
-        </div>
-      </div>
-    </div>
-<!--     # si @gists_result.nil? ?
- render réponse de search_for_category
- si @gistid .nil? || .empty?
- render réponse de fetch_all_gists_from_github -->
-
-   <div id="search_results_block">
-    <% unless @gists_result.nil? %>
-      <%= render "gists/display_all_gists_cards_for_index" %>
-    <% end %>
-    <% unless @gistid.nil? %>
-      <%= render "gists/display_gists_cards_after_search" %>
-    <% end %>
-  </div>
-            <% end %>
 </div>
