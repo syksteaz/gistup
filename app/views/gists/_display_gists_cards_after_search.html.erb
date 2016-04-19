@@ -3,7 +3,7 @@
     <%= check_box_tag "gist_ids[]", gistid %> Add a category to this gist
     <div class="card" style="background: linear-gradient(to left, #616161 , #9bc5c3)">
       <% find_gist_categories(gistid).each do |category| %>
-        <div class="card-category btn-warning"><%= category %></div>
+        <div class="card-category btn-info"><%= category %></div>
       <% end %>
       <div class="card-description">
         <h2><%= @hash_of_gists_for_display[:filename] %></h2>
