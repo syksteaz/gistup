@@ -25,11 +25,9 @@
         <div class="col-xs-12 col-md-6">
           <div class="margin-vertical-extra-light">
   <!--           <div class="btn-medium"> -->
-              <% the_access_token = "" %>
-              <% params[:access_token].nil? ? ( the_access_token = params[:search][:access_token] ) : ( the_access_token = params[:access_token] ) %>
               <div class="form-inline text-center">
               <%= simple_form_for :search, url: gists_path, method: :get, remote: true do |f| %>
-                <%= f.input :access_token, as: :hidden,  :input_html => { :value => the_access_token }, class: "form-control" %>
+                <%= f.input :access_token, as: :hidden,  :input_html => { :value => params[:access_token] || params[:search][:access_token] }, class: "form-control" %>
                 <%= f.input :category, placeholder: "Search for a category", label: false, class: "form-control" %>
                 <%= f.button :submit, 'Search category', class: "btn-medium-custom" %>
               <% end %>
